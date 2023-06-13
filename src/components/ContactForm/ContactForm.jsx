@@ -27,6 +27,7 @@ export const ContactForm = () => {
     };
     
     const message = name => alert(`${name} is already in contacts`);
+    
         return (
             <form
                 className={css.form}
