@@ -10,16 +10,15 @@ export const ContactList = () => {
     const filter = useSelector(state => state.filter);
     const dispatch = useDispatch();
 
-    const filteredContacts = () => {
+    const filteredContacts = () => 
         contacts.filter(contact =>
         contact.name.toLowerCase().includes(filter.toLowerCase()));
-    };
 
     const removeContact = id => dispatch(deleteContact(id));
 
     return (
         <ul className={css.contactList}>
-            {filteredContacts.map(contact => (
+            {filteredContacts().map(contact => (
                 <li key={contact.id} className={css.contactListItem}>
                     <Contact 
                     contact={contact} 

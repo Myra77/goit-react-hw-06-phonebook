@@ -1,9 +1,15 @@
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addContact } from '../../redux/contactsSlice';
 import css from './ContactForm.module.css';
 
-export const ContactForm = ({createUser}) => {
+export const ContactForm = () => {
     const [name, setName] = useState('');
     const [number, setNumber] = useState('');
+    const dispatch = useDispatch();
+    const contacts = useSelector(state => state.contacts);
+
+    const createContact = contact => dispatch(addContact(contact));
     
 
     const handleInputChange = ({ target: { name, value } }) => {
@@ -13,16 +19,19 @@ export const ContactForm = ({createUser}) => {
 
     const handleSubmit = e => {
         e.preventDefault();
+        if (contacts.some(contact => contact.name === name)) alertmessage(name)
+        else createContact({ name, number });
 
-        createUser({
-            name,
-            number,
-        });
+        // createContact({
+        //     name,
+        //     number,
+        // });
     
         setName('');
         setNumber('');
     };
     
+    const alertmessage = name => alert(`${name} is already in contacts`);
         return (
             <form
                 className={css.form}
