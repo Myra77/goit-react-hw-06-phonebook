@@ -19,19 +19,14 @@ export const ContactForm = () => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        if (contacts.some(contact => contact.name === name)) alertmessage(name)
+        if (contacts.some(contact => contact.name === name)) message(name)
         else createContact({ name, number });
-
-        // createContact({
-        //     name,
-        //     number,
-        // });
     
         setName('');
         setNumber('');
     };
     
-    const alertmessage = name => alert(`${name} is already in contacts`);
+    const message = name => alert(`${name} is already in contacts`);
         return (
             <form
                 className={css.form}
